@@ -1,0 +1,13 @@
+package com.disaster.alertservice.entity;
+
+public enum AlertType {
+    INCIDENT_CREATED,
+    INCIDENT_ACKNOWLEDGED,
+    NO_TEAM_AVAILABLE,
+    TEAM_ASSIGNED,
+    RESOURCE_SHORTAGE,
+    RESOURCE_DAMAGED,
+    MISSION_STUCK,
+    MISSION_FAILED,
+    MISSION_COMPLETED
+}
