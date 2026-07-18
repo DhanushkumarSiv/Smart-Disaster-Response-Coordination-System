@@ -8,11 +8,10 @@ import com.disaster.missionservice.dto.MissionTeamRequestDto;
 import com.disaster.missionservice.dto.incidentDto.IncidentDto;
 import com.disaster.missionservice.dto.incidentDto.IncidentSeverity;
 import com.disaster.missionservice.dto.rescueTeamDto.RescueTeamStatus;
-import com.disaster.missionservice.entity.MissionStatus;
-import com.disaster.missionservice.entity.Priority;
-import com.disaster.missionservice.entity.TeamStatus;
+import com.disaster.missionservice.entity.*;
 import com.disaster.missionservice.exception.IncidentNotFoundException;
 import com.disaster.missionservice.mapper.DisasterMapper;
+import com.disaster.missionservice.mapper.DtoToEntity;
 import com.disaster.missionservice.repository.MissionRepository;
 import com.disaster.missionservice.repository.MissionResourceRepository;
 import com.disaster.missionservice.repository.MissionTeamsRepository;
@@ -42,6 +41,9 @@ public class MissionService {
 
     @Autowired
     private DisasterMapper disasterMapper;
+
+    @Autowired
+    private DtoToEntity dtoToEntity;
 
 
     public Mono<MissionResponseDto> createMission() {
@@ -73,12 +75,13 @@ public class MissionService {
                     missionRequestDto.setMissionStatus(MissionStatus.CREATED);
                     missionRequestDto.setEscalated(false);
                     missionRequestDto.setCreatedAt(LocalDateTime.now());
+                    Missions mission = missionRepository.save(dtoToEntity.toMissions(missionRequestDto));
 
-                    return assignRescueTeam(incidentDto);
+                    return assignRescueTeam(incidentDto, mission);
                 });
     }
 
-    private Mono<MissionResponseDto> assignRescueTeam(IncidentDto incidentDto) {
+    private Mono<MissionResponseDto> assignRescueTeam(IncidentDto incidentDto, Missions mission) {
 
         return rescueTeamClient.getRescueTeam()
 
@@ -93,6 +96,15 @@ public class MissionService {
                     missionTeamRequestDto.setRescueTeamId(rescueTeamDto.getTeamId());
                     missionTeamRequestDto.setAssignedAt(LocalDateTime.now());
                     missionTeamRequestDto.setTeamStatus(TeamStatus.ASSIGNED);
+                    missionTeamRequestDto.setMissionId(mission.getMissionId());
+                    MissionTeams missionTeam = missionTeamsRepository.save(dtoToEntity.toMissionTeams(missionTeamRequestDto));
+
+                    return assignResources(mission);
                 });
+    }
+
+    private Mono<MissionResponseDto> assignResources(Missions mission) {
+
+        
     }
 }
