@@ -1,0 +1,36 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Gateway
+
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: Incident-Service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/api/v1/incident/**
+
+            - id: Rescue-Service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/api/v1/rescueTeam/**
+
+            - id: Resource-Service
+              uri: http://localhost:8083
+              predicates:
+                - Path=/api/v1/resource/**
+
+            - id: Alert-Service
+              uri: http://localhost:8084
+              predicates:
+                - Path=/api/v1/alert/**
+
+            - id: Mission-Service
+              uri: http://localhost:8085
+              predicates:
+                - Path=/api/v1/mission/**
