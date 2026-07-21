@@ -1,5 +1,6 @@
 package com.disaster.incidentservice.dto;
 
+import com.disaster.incidentservice.entity.Disaster;
 import com.disaster.incidentservice.entity.Severity;
 import com.disaster.incidentservice.entity.Status;
 import jakarta.validation.constraints.NotBlank;
@@ -21,6 +22,11 @@ public class IncidentRequestDto {
 
     @NotBlank(message = "Location field must be filled.")
     private String location;
+
+    @NotNull(message = "Disaster Name field must be selected.")
+    private Disaster disasterName;
+
+    private String description;
 
     @NotNull(message = "Severity field must be selected.")
     private Severity severity;

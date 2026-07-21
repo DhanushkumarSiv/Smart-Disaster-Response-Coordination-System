@@ -18,6 +18,11 @@ public class Incident {
 
     private String reporterMobileNumber;
 
+    @Enumerated(EnumType.STRING)
+    private Disaster disasterName;
+
+    private String description;
+
     private String location;
 
     @Enumerated(EnumType.STRING)
