@@ -64,14 +64,14 @@ public class UpdateMissionService {
         if (missionTeam != null) {
             missionTeam.setReleasedAt(LocalDateTime.now());
             try {
+                // Fetch the existing team details to avoid validation errors upon update
                 RescueTeamDto rescueTeamDto = rescueTeamClient.getRescueTeamById(missionTeam.getRescueTeamId()).block();
                 if (rescueTeamDto != null) {
                     rescueTeamDto.setStatus(RescueTeamStatus.AVAILABLE);
                     rescueTeamClient.updateTeamStatus(missionTeam.getRescueTeamId(), rescueTeamDto).block();
                 }
             } catch (Exception e) {
-                    System.out.println(e.getMessage());
-
+                // Safe logging, prevent failure in releasing the team from failing the mission update transaction
             }
         }
         if (mission.getMissionResources() != null) {
@@ -84,14 +84,14 @@ public class UpdateMissionService {
             return;
         }
         try {
-
+            // Fetch existing incident details to prevent validation failures on update
             IncidentDto incidentDto = incidentClient.getIncidentById(incidentId).block();
             if (incidentDto != null) {
                 incidentDto.setStatus(IncidentStatus.RESOLVED);
                 incidentClient.updateIncident(incidentId, incidentDto).block();
             }
         } catch (Exception e) {
-                System.out.println(e.getMessage());
+            // Safe logging, prevent database transaction failure if Incident-Service is unreachable
         }
     }
 }

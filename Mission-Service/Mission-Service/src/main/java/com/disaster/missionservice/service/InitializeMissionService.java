@@ -111,7 +111,7 @@ public class InitializeMissionService {
                     if (teams.isEmpty()) {
                         return Mono.error(new NoAvailableTeamException("No AVAILABLE rescue team found"));
                     }
-
+                    // Simply pick the first available team matching the department
                     RescueTeamDto selectedTeam = teams.get(0);
                     return Mono.just(selectedTeam);
                 })

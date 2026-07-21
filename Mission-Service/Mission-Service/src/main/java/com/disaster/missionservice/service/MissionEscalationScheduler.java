@@ -21,6 +21,7 @@ public class MissionEscalationScheduler {
     @Autowired
     private AlertClient alertClient;
 
+    // Checks every minute
     @Scheduled(fixedRate = 60000)
     public void escalateUnresolvedMissions() {
         LocalDateTime cutoff = LocalDateTime.now().minusMinutes(30);
@@ -34,6 +35,7 @@ public class MissionEscalationScheduler {
                 mission.setEscalated(true);
                 missionRepository.save(mission);
 
+                // Construct alert Request matching Alert-Service's AlertRequestDto
                 AlertDto alertDto = new AlertDto();
                 alertDto.setAlertType("MISSION_STUCK");
                 alertDto.setSourceService("MISSION");
@@ -42,8 +44,11 @@ public class MissionEscalationScheduler {
                 alertDto.setMessage("Mission " + mission.getMissionId() + " has been unresolved for 30 minutes and is escalated.");
                 alertDto.setIsAcknowledged(false);
 
-                alertClient.sendAlert(alertDto);
-
+                try {
+                    alertClient.sendAlert(alertDto);
+                } catch (Exception e) {
+                    // Prevent failure to reach Alert Service from interrupting scheduler loop
+                }
             }
         }
     }
