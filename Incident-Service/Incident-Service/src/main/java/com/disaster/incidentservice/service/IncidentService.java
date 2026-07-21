@@ -4,7 +4,6 @@ import com.disaster.incidentservice.dto.IncidentRequestDto;
 import com.disaster.incidentservice.dto.IncidentResponseDto;
 import com.disaster.incidentservice.entity.Incident;
 import com.disaster.incidentservice.exception.IncidentNotFoundException;
-import com.disaster.incidentservice.mapper.DtoToDtoMapper;
 import com.disaster.incidentservice.mapper.DtoToEntityMapper;
 import com.disaster.incidentservice.mapper.EntityToDtoMapper;
 import com.disaster.incidentservice.repository.IncidentRepository;
@@ -45,11 +44,11 @@ public class IncidentService {
 
     public List<IncidentResponseDto> getAllIncident() {
         List<Incident> incidents = incidentRepository.findAll();
-        List<IncidentResponseDto> incidentResponseDtos = new ArrayList<>();
+        List<IncidentResponseDto> incidentResponseDtoList = new ArrayList<>();
         for (Incident incident : incidents) {
-            incidentResponseDtos.add(entityToDtoMapper.toIncidentResponseDto(incident));
+            incidentResponseDtoList.add(entityToDtoMapper.toIncidentResponseDto(incident));
         }
-        return incidentResponseDtos;
+        return incidentResponseDtoList;
     }
 
     public IncidentResponseDto updateIncident(Long incidentId, IncidentRequestDto incidentRequestDto) {
