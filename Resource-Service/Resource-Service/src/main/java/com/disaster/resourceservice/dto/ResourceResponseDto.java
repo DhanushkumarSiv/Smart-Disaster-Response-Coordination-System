@@ -23,7 +23,6 @@ public class ResourceResponseDto {
 
     private Boolean isActive;
 
-    private List<InventoryResponseDto> inventories;
+    private InventoryResponseDto inventories;
 
-    private List<MappingResponseDto> mappings;
 }
