@@ -13,7 +13,7 @@ public class IncidentDto {
 
     private String reporterMobileNumber;
 
-    private IncidentDisaster disasterName;
+    private DisasterName disasterName;
 
     private String description;
 

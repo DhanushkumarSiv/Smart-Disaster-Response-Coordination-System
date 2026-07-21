@@ -14,15 +14,11 @@ public class MissionResource {
 
     private Long resourceId;
 
-    private Double quantityAllocated;
+    private Double quantity;
 
-    private Double quantityConsumed;
+    private ResourceStatus resourceStatus;
 
-    private Double quantityReturned;
-
-    private ResourceStatus missionStatus;
-
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "missionId")
     private Missions mission;
 }

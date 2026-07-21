@@ -2,8 +2,10 @@ package com.disaster.missionservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class MissionServiceApplication {
 
     public static void main(String[] args) {

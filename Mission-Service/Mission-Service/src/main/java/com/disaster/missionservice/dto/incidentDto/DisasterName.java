@@ -1,6 +1,6 @@
 package com.disaster.missionservice.dto.incidentDto;
 
-public enum IncidentDisaster {
+public enum DisasterName {
     FIRE,
     FLOOD,
     CYCLONE,

@@ -1,12 +1,14 @@
 package com.disaster.missionservice.mapper;
 
-import com.disaster.missionservice.dto.incidentDto.IncidentDisaster;
+import com.disaster.missionservice.dto.incidentDto.DisasterName;
 import com.disaster.missionservice.dto.rescueTeamDto.TeamDepartment;
 import com.disaster.missionservice.exception.TeamNotFoundException;
+import org.mapstruct.Mapper;
 
+@Mapper(componentModel = "spring")
 public class DisasterMapper {
 
-    public TeamDepartment mapDepartment(IncidentDisaster incidentDisaster){
+    public TeamDepartment mapDepartment(DisasterName incidentDisaster){
 
         switch(incidentDisaster){
             case FIRE:

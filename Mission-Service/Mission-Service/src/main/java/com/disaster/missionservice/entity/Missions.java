@@ -19,6 +19,8 @@ public class Missions {
 
     private String title;
 
+    private DisasterName disasterName;
+
     private String description;
 
     private String Location;
@@ -37,11 +39,11 @@ public class Missions {
 
     private LocalDateTime completedAt;
 
-    @OneToMany(mappedBy = "missions", cascade = CascadeType.ALL)
-    private List<MissionTeams> missionTeams;
+    @OneToOne(mappedBy = "mission", cascade = CascadeType.ALL)
+    private MissionTeams missionTeams;
 
-    @OneToMany(mappedBy = "missions", cascade = CascadeType.ALL)
-    private List<MissionResource> missionResources;
+    @OneToOne(mappedBy = "mission", cascade = CascadeType.ALL)
+    private MissionResource missionResources;
 
     @PrePersist
     public void prePersist() {

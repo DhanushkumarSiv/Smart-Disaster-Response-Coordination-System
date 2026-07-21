@@ -1,5 +1,6 @@
 package com.disaster.missionservice.entity;
 
+import com.disaster.missionservice.dto.rescueTeamDto.RescueTeamStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,14 +17,13 @@ public class MissionTeams {
 
     private Long rescueTeamId;
 
-    private LocalDateTime assignedAt;
+    private String missionTeamName;
 
-    @Enumerated(EnumType.STRING)
-    private TeamStatus teamStatus;
+    private LocalDateTime assignedAt;
 
     private LocalDateTime releasedAt;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "missionId")
     private Missions mission;
 }

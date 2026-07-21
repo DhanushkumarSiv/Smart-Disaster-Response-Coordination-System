@@ -2,7 +2,7 @@ package com.disaster.missionservice.entity;
 
 public enum MissionStatus {
     CREATED,
-    ASSIGNED,
+    STARTED,
     IN_PROGRESS,
     COMPLETED,
     FAILED,
