@@ -1,18 +1,18 @@
-package com.disaster.missionservice.dto;
+package com.disaster.missionservice.dto.missionDto;
 
-import com.disaster.missionservice.entity.TeamStatus;
+import com.disaster.missionservice.dto.rescueTeamDto.RescueTeamStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class MissionTeamRequestDto {
+public class MissionTeamsResponseDto {
 
     private Long rescueTeamId;
 
     private LocalDateTime assignedAt;
 
-    private TeamStatus teamStatus;
+    private String missionTeamName;
 
     private LocalDateTime releasedAt;
 
