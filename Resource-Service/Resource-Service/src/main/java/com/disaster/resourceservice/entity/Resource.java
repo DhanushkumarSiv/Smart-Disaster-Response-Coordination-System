@@ -27,9 +27,7 @@ public class Resource {
 
     private Boolean isActive;
 
-    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL)
-    private List<Inventory> inventories;
+    @OneToOne(mappedBy = "resource", cascade = CascadeType.ALL)
+    private Inventory inventories;
 
-    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL)
-    private List<Mapping> mappings;
 }
