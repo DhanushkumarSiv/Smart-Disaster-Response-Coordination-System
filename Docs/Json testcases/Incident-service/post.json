@@ -1,0 +1,9 @@
+{
+  "reporterName": "Arun Kumar",
+  "reporterMobileNumber": "9123456789",
+  "location": "Mumbai",
+  "disasterName": "FLOOD",
+  "description": "Heavy rainfall has caused severe flooding in low-lying areas",
+  "severity": "HIGH",
+  "status": "REPORTED"
+}

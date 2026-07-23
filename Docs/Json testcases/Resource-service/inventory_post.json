@@ -1,0 +1,8 @@
+{
+  "location": "Mumbai Warehouse 1",
+  "totalQuantity": 100,
+  "reservedQuantity": 30,
+  "reorderLevel": 20,
+  "status": "AVAILABLE",
+  "resourceId": 3
+}

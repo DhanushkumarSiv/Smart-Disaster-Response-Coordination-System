@@ -1,0 +1,8 @@
+{
+  "resourceCode": "RES-FLD-001",
+  "name": "BOAT",
+  "description": "Used for rescuing people during flood situations",
+  "category": "EQUIPMENT",
+  "unitOfMeasure": "UNIT",
+  "isActive": true
+}
