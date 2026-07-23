@@ -111,7 +111,7 @@ public class InitializeMissionService {
                     if (teams.isEmpty()) {
                         return Mono.error(new NoAvailableTeamException("No AVAILABLE rescue team found"));
                     }
-                    // Simply pick the first available team matching the department
+
                     RescueTeamDto selectedTeam = teams.get(0);
                     return Mono.just(selectedTeam);
                 })
@@ -135,11 +135,11 @@ public class InitializeMissionService {
                     rescueTeamDto2.setDepartment(rescueTeamDto.getDepartment());
 
                     return rescueTeamClient.updateTeamStatus(rescueTeamDto.getTeamId(), rescueTeamDto2)
-                            .then(assignResources(mission, missionTeamsResponseDto));
+                            .then(assignResources(mission));
                 });
     }
 
-    private Mono<MissionCreateResponseDto> assignResources(Missions mission, MissionTeamsResponseDto missionTeamsResponseDto) {
+    private Mono<MissionCreateResponseDto> assignResources(Missions mission) {
 
         return resourceClient.getResources()
                 .filter(resourceDto ->
@@ -157,7 +157,7 @@ public class InitializeMissionService {
                     MissionResource missionResource = dtoToEntity.toMissionResource(missionResourceRequestDto);
                     missionResource.setMission(mission);
                     missionResourceRepository.save(missionResource);
-                    MissionResourceResponseDto missionResourceResponseDto = entityToDto.toMissionResourceResponseDto(missionResource);
+                    entityToDto.toMissionResourceResponseDto(missionResource);
 
                     MissionCreateResponseDto missionCreateResponseDto = new MissionCreateResponseDto();
                     missionCreateResponseDto.setMissionId(mission.getMissionId());
